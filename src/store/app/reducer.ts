@@ -32,13 +32,15 @@ import { LoadingStates } from '../../const'
 import WebApp from '@twa-dev/sdk'
 
 const initialState: Store = {
-    id: WebApp.initDataUnsafe?.user?.id ? WebApp.initDataUnsafe.user.id : process.env.TGID,
+    id: WebApp?.initDataUnsafe?.user?.id,
     activeNavTab: 'main',
     balance: null,
     energy: null,
     time: 0,
+    current_time: 0,
     infoData: {
-        time: 0
+        time: 0,
+        current_time: 0
     },
     friendsPage: {
         url: ''
@@ -90,6 +92,7 @@ export const appReducer = createReducer(initialState, (builder) => {
         state.balance = payload.balance
         state.energy = payload.energy
         state.time = payload.time
+        state.current_time = payload.current_time
         state.loadingInfoError = initialState.loadingInfoError
         state.loadingInfoData = LoadingStates.SUCCEEDED
     })
@@ -102,12 +105,14 @@ export const appReducer = createReducer(initialState, (builder) => {
         state.balance = state?.balance || null
         state.energy = state?.energy || null
         state.time = state?.time || null
+        state.current_time = state?.current_time || null
         state.loadingTapResError = initialState.loadingInfoError
     })
     .addCase(fetchGetTapSuccess, (state, { payload }) => {
         state.balance = payload.balance
         state.energy = payload.energy
         state.time = payload.time
+        state.current_time = payload.current_time
         state.loadingTapResError = initialState.loadingInfoError
         state.loadingTapRes = LoadingStates.SUCCEEDED
     })
