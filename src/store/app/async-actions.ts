@@ -38,7 +38,7 @@ const api = axios.create({
       'Content-Type': 'application/json',
       'ngrok-skip-browser-warning': 'true',
     },
-    baseURL: process.env.REACT_APP_SERVER_URL,
+    baseURL: 'https://3318-188-242-33-160.ngrok-free.app/api',
   });
 
 export const fetchInfo = (id: string | number): any => {
@@ -48,6 +48,7 @@ export const fetchInfo = (id: string | number): any => {
         .get(`/info/${id}`)
         .then((res: any) => {
           dispatch(fetchGetInfoSuccess(res.data));
+          console.log('fhhhhhhhhhhhhhhhhhhhhhhhh')
         })
         .catch((error) => {
           console.log(error);
